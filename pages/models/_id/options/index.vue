@@ -1,0 +1,599 @@
+<template>
+  <div class="main-body model-options offset-model-header">
+
+		<Model-header :page_data="page_data" :route_id="$route.params.id" :price_min="page_data.minPrice"/>
+
+    <div class="options-bnr relative card-top">
+      <div class="container-p relative">
+        <div class="flex-adaptive align-center justify-c-between">
+					<div class="breadcrumb-container">
+						<ol class="breadcrumb">
+							<li><nuxt-link :to="localePath('index')">{{ $t('menu[0]') }}</nuxt-link></li>
+							<li><nuxt-link :to="localePath('/models')">{{ $t('menu[1]') }}</nuxt-link></li>
+							<li><nuxt-link :to="localePath('/models/'+$route.params.id+'/desc')">{{page_data.name}}</nuxt-link></li>
+							<li><nuxt-link to="">{{$t("model_header[1]")}}</nuxt-link></li>
+						</ol>
+					</div>
+					<div class="link-content" v-if="page_data.pdf">
+						<ul class="list-inline font-size-1 mobile:mt-6">
+							<li class="hide">
+								<a :href="page_data.pdf" class="hover-aunderline" :download="page_data.name" target="_blank">
+									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" class="mr-1" data-v-22b6d7c2=""><path d="M2.75.75h9.94l4.56 4.56v13.94H2.75V.75z" stroke="currentColor" stroke-width="1.5" data-v-22b6d7c2=""></path><path d="M12.5 1v5h4" stroke="currentColor" stroke-width="1.5" data-v-22b6d7c2=""></path></svg>
+									<span class="m-l-5">{{$t("model_header[7]")}}</span>
+								</a>
+							</li>
+							<li class="hide">
+								<a href="feedback-2.html" class="hover-aunderline">
+									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" class="mr-1" data-v-3802aeb3=""><path d="M2.494 3.506l1.299-1.299a1 1 0 011.414 0l2.66 2.66A1 1 0 017.941 6.2l-.681.851c-.467.584-.583 1.388-.203 2.032 1.318 2.23 3.191 3.5 4.511 4.086.57.254 1.218.103 1.706-.287l1.027-.822a1 1 0 011.332.074l2.603 2.603a1 1 0 01-.056 1.467l-1.691 1.45c-.63.54-1.46.82-2.286.734-1.801-.19-4.602-.786-7.703-3.887-3.716-3.716-4.577-6.634-4.855-8.603-.125-.882.219-1.761.849-2.39zM11 5c1.333 0 4 .8 4 4M10 2c2.667 0 8 1.6 8 8" stroke="currentColor" stroke-width="1.5" data-v-3802aeb3=""></path></svg>
+									<span class="m-l-5">{{$t("model_header[8]")}}</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+        </div>
+        <div class="entry-intro">
+          <div class="relative">
+            <h2>{{$t("model_header[1]")}} {{page_data.name}}</h2>
+            <div class="price-content flex-adaptive justify-c-between align-center">
+              <div class="m-r-md-30">
+                <p class="color-gray">
+									{{$t("other.price")}}
+									<template v-if="$i18n.localeProperties.code == 'ru'">{{ $t('other.from') }}</template>
+								</p>
+                <div class="text-x3 fw-6 m-t-5 align-center">
+                  <span>
+										{{page_data.minPrice | spaceBetweenNum}} {{$t("other.price_text")}}
+										<template v-if="$i18n.localeProperties.code == 'uz'">{{ $t('other.from') }}</template>
+									</span>
+                  <a class="flex m-l-15" href="javascript:;" data-src="#textcredit" data-fancybox><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" role="button" class="color-gray-3 info-icon-gray info-icon"><circle cx="10" cy="10" r="9.25" stroke="currentColor" stroke-width="1.5"></circle><path d="M9 15h2V8.5H9V15z" fill="currentColor"></path><circle cx="10" cy="6.25" r="1.25" fill="currentColor"></circle></svg></a>
+                </div>
+              </div>
+              <div class="btn-content" v-if="page_data.minPrice">
+                <span class="btn-def style-2 m-v-20">
+                  <nuxt-link :to="localePath(page_data.callback.url)" class="p-v-20">{{page_data.callback.title}}</nuxt-link>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="img-content text-center m-auto box-md-7 box-lg-6 m-v-30">
+          <picture>
+            <source :srcset="page_data.sideImage" media="(max-width: 769px)">
+            <img :src="page_data.sideImage">
+          </picture>
+        </div>
+      </div>
+    </div>
+
+		<div class="options-header scrolled-down">
+			<div class="options-header-content">
+				<div class="container-p">
+					<div class="flex jc-between">
+						<ul class="list">
+							<li class="filter-btn">
+								<a href=".options-entry" class="align-center justify-center" tc="filter-hidden">
+									<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" class=""><path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 6.5a2 2 0 104 0 2 2 0 00-4 0zM0 6h3.035a3.5 3.5 0 016.93 0H20v1.5H9.855a3.502 3.502 0 01-6.71 0H0V6zm11.5 7.5a2 2 0 104 0 2 2 0 00-4 0zM0 13h10.035a3.501 3.501 0 016.93 0H20v1.5h-3.145a3.502 3.502 0 01-6.71 0H0V13z" fill="currentColor"></path></svg> 
+									<span class="m-l-15">{{$t("properties[0]")}}</span>
+								</a>
+							</li>
+							<li>
+								{{complectations.length}}
+								<span v-if="complectations.length == 1">{{$t("properties[1]")}}</span> 
+								<span v-else>{{$t("properties[2]")}}</span> 
+							</li>
+							<li class="hide">
+								<div>
+									<input type="checkbox"  id="checkbox-diff-spec" name="" class="checkbox-style-1 none">
+									<label for="checkbox-diff-spec" class="align-center" role="button">
+										<span class="checkbox-style-1"></span>
+										<span class="m-l-5">{{$t("properties[3]")}}</span>
+									</label>
+								</div>
+							</li>
+						</ul>
+						<div class="link-content">
+							<ul class="list-inline font-size-1 fw-6">
+								<li>
+									<a :href="page_data.pdf" class="hover-aunderline" :download="page_data.name" target="_blank">
+										<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" class="mr-1" data-v-22b6d7c2=""><path d="M2.75.75h9.94l4.56 4.56v13.94H2.75V.75z" stroke="currentColor" stroke-width="1.5" data-v-22b6d7c2=""></path><path d="M12.5 1v5h4" stroke="currentColor" stroke-width="1.5" data-v-22b6d7c2=""></path></svg>
+										<span class="m-l-5">{{$t("model_header[7]")}}</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="options-entry scrolled-down">
+			<div class="container-p relative">
+				<div class="config-sidebar">	
+					<div class="config-filter">
+						<div class="config-filter-items">
+							<fieldset>
+								<h4>{{$t("properties[4]")}}</h4>
+								<div class="input-items">
+									<label role="button" class="align-center m-v-15" 
+										v-for="(engine, key) in page_data.engines"
+										:key="key">
+										<input type="checkbox" name="engineId" class="none" :value="engine.id">
+										<span class="checkbox-style-1"></span>
+										<span class="m-l-10">{{engine.name}}</span>
+									</label>
+								</div>
+							</fieldset>
+							<fieldset>
+								<h4>{{$t("properties[6]")}}</h4>
+								<div class="input-items">
+									<label role="button" class="align-center m-v-15" 
+										v-for="(complectation, key) in page_data.compls"
+										:key="key">
+										<input type="checkbox" name="id" class="none" :value="complectation.id">
+										<span class="checkbox-style-1"></span>
+										<span class="m-l-10">{{complectation.name}}</span>
+									</label>
+								</div>
+							</fieldset>
+							<fieldset v-if="page_data.privodi.length > 1">
+								<h4>{{$t("properties[7]")}}</h4>
+								<div class="input-items">
+									<label role="button" class="align-center m-v-15"
+										v-for="(drive, key) in page_data.privodi" :key="key">
+										<input type="checkbox" name="drive" class="none" :value="drive.id">
+										<span class="checkbox-style-1"></span>
+										<span class="m-l-10">{{drive.privod}}</span>
+									</label>
+								</div>
+							</fieldset>
+							<fieldset v-if="false">
+								<div class="flex-adaptive row">
+									<div class="input-content p-h-15">
+										<input type="" name="" class="form-control" value="">
+									</div>
+									<div class="input-content p-h-15">
+										<input type="" name="" class="form-control" value="">
+									</div>
+								</div>
+							</fieldset>
+							<br>
+							<fieldset>
+								<h4 class="m-v-20">{{$t("properties[8]")}}</h4>
+								<div class="collapse-content">
+									<fieldset v-for="(parentOption, key) in page_data.options" :key="key">
+										<a data-toggle="collapse" data-parent="#accordion" :href="'#prc-'+key" aria-expanded="true">
+											<span>{{parentOption.name}}</span><i class="fa fa-angle-down"></i>
+										</a>
+										<ul :id="'prc-'+key" class="panel-collapse collapse" role="tabpanel">
+											<li v-for="(option, key) in parentOption.options" :key="key">
+												<label role="button" class="align-center m-v-15">
+													<input type="checkbox" name="options" class="none" :value="option.id">
+													<span class="checkbox-style-1"></span>
+													<span class="m-l-10">{{option.name}}</span>
+												</label>
+											</li>
+										</ul>
+									</fieldset>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				</div>
+				
+				<div class="options-body">
+					<div class="wrapper">
+						<div class="config-content">
+							<div class="config-variants">
+								<div class="config-variants-items owl-carousel" v-if="statusCompl">
+									<div class="cell" v-for="(complectation, key) in complectations" :key="key" :filter-param="complectation.id">
+										<div class="cell-wrapper">
+											<nuxt-link :to="localePath('/models/'+$route.params.id+'/options/'+complectation.id)"><h4>{{complectation.name}} <i class="fa fa-angle-right fw-6"></i></h4></nuxt-link>
+											<div>
+												<p>
+													<template v-for="(engine) in page_data.engines" v-if="engine.id == complectation.engineId">{{engine.name}}</template> 
+													<!-- / 
+													<template v-for="(gear) in page_data.gears" v-if="gear.id == complectation.gearId">{{gear.gear}}</template> /
+													<template v-for="(drive) in page_data.privodi" v-if="drive.id == complectation.privodId">{{drive.privod}}</template> -->
+												</p>
+												<div class="price-content m-t-15">
+													<h4 class="mb-1 old-price" v-if="complectation.old_price">
+														<span v-if="complectation.old_price" class="old-price-text" style="color: inherit;">
+															{{complectation.old_price | spaceBetweenNum}} {{ $t('other.price_text') }}
+														</span>
+													</h4>
+													{{complectation.price | spaceBetweenNum}} {{$t("other.price_text")}}
+													<span v-if="page_data.helper" data-toggle="tooltip" data-placement="top" class="price-tooltip" :title="page_data.helper" style="color: red;">*</span>
+													<div class="new-price" v-if="complectation.dop_price" style="font-size: 12px; margin-top: 3px;">
+														<template v-if="$i18n.localeProperties.code == 'ru'">
+															{{ complectation.dop_price | spaceBetweenNum }} 
+															{{ $t('other.price_text') }} 
+															{{ page_data.helper_day }} 
+														</template>
+														<template v-if="$i18n.localeProperties.code == 'uz'">
+															{{ page_data.helper_day }} 
+															{{ complectation.dop_price | spaceBetweenNum }} 
+															{{ $t('other.price_text') }}
+															{{ $t('other.from') }}
+														</template>
+													</div>
+													<!-- <div class="old-price" v-if="complectation.old_price">
+														<template v-if="$i18n.localeProperties.code == 'ru'">
+															{{ complectation.old_price | spaceBetweenNum }} 
+															{{ $t('other.price_text') }} 
+														</template>
+														<template v-if="$i18n.localeProperties.code == 'uz'">
+															{{ complectation.old_price | spaceBetweenNum }} 
+															{{ $t('other.price_text') }} 
+															{{ $t('other.from') }}
+														</template>
+													</div> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="config-details">
+					<div>
+						<section class="item active" v-if="page_data.standart">
+							<a href=".item" class="title-click" tc tc-closest>{{$t("configurator[9]")}}<i class="fa fa-angle-up"></i></a>
+							<div class="section-body">
+								<div class="section-body-wrapper">
+									<div class="list-block-body" v-for="(item, key) in page_data.standart" :key="key">
+										<h4>{{item.name}}</h4>
+										<ul>
+											<li v-for="(text, key) in item.values" :key="key">
+												<span>{{text}}</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
+					<section class="item" v-for="(parentOption, key) in page_data.options" :key="key">
+						<a href=".item" class="title-click" tc tc-closest>{{parentOption.name}}<i class="fa fa-angle-up"></i></a>
+						<div class="section-body">
+							<div class="section-body-wrapper">
+								<div class="config-param-item" v-for="(option, key) in parentOption.options" :key="key">
+									<div class="config-param-item-wrapper">
+										<p class="m-b-15 align-center">{{option.name}}</p>
+										<div class="owl-table owl-carousel" v-if="statusCompl">
+											<div class="owl-table-item" v-for="(complectation, key) in complectations" :key="key">
+												<div class="op-enable" v-for="(complectationOptionId, key) in complectation.options" v-if="complectationOptionId == option.id" :key="key">
+													<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" class=""><circle cx="5" cy="5" r="5" fill="currentColor"></circle></svg> 
+												</div>
+												<div><div>—</div></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="item exterior-color-section">
+						<a href=".item" class="title-click" tc tc-closest>{{$t("properties[9]")}}<i class="fa fa-angle-up"></i></a>
+						<div class="section-body">
+							<div class="section-body-wrapper">
+								<div class="config-param-item">
+									<div class="config-param-item-wrapper">
+										<div class="owl-table owl-carousel">
+											<div class="owl-table-item" v-for="(complectation, keyParent) in page_data.compls" :key="keyParent">
+												<div class="owl-table-item-box" v-for="(colorPrice, key) in complectation.exteriorPrices" :key="key">
+													<div v-if="key == 0"> {{$t("properties[10]")}} </div>
+													<div v-else> + {{key | spaceBetweenNum}} {{$t("other.price_text")}}</div>
+													<ul class="color-list mv-2 pb-4">
+														<li v-for="(color, key) in colorPrice" :key="key">
+															<a v-if="keyParent == 0" href="javascript:;" data-toggle="tooltip" data-placement="right" :title="color.name">
+																<div class="color-circle" :style="'background-image: url('+color.icon+');'"></div>
+															</a>
+															<a v-else href="javascript:;" data-toggle="tooltip" data-placement="bottom" :title="color.name">
+																<div class="color-circle" :style="'background-image: url('+color.icon+');'"></div>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="item exterior-color-section">
+						<a href=".item" class="title-click" tc tc-closest>{{$t("properties[11]")}}<i class="fa fa-angle-up"></i></a>
+						<div class="section-body">
+							<div class="section-body-wrapper">
+								<div class="config-param-item">
+									<div class="config-param-item-wrapper">
+										<div class="owl-table owl-carousel">
+											<div class="owl-table-item" v-for="(complectation, keyParent) in page_data.compls" :key="keyParent">
+												<div class="owl-table-item-box" v-for="(colorPrice, key) in complectation.interiorPrices" :key="key">
+													<div v-if="key == 0"> {{$t("properties[10]")}} </div>
+													<div v-else> + {{key | spaceBetweenNum}} {{$t("other.price_text")}}</div>
+													<ul class="color-list mv-2 pb-4">
+														<li v-for="(color, key) in colorPrice" :key="key">
+															<a v-if="keyParent == 0" href="javascript:;" data-toggle="tooltip" data-placement="right" :title="color.name">
+																<div class="color-circle" :style="'background-image: url('+color.icon+');'"></div>
+															</a>
+															<a v-else href="javascript:;" data-toggle="tooltip" data-placement="bottom" :title="color.name">
+																<div class="color-circle" :style="'background-image: url('+color.icon+');'"></div>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+
+  </div>
+</template>
+
+
+
+
+
+<script>
+import { fetchPath } from '~/api/otherApi';
+import Vue from 'vue';
+import _ from 'lodash';
+import ModelHeader from "@/components/models/Model-header";
+Vue.use(_);
+
+
+export default {
+  head() {
+    return {
+      title: 'Комплектации и цены',
+      meta: [
+        {
+          content: 'Комплектации и цены'
+        }
+      ],
+    }
+  },
+  async asyncData({ params, query, $axios, error, store, route, redirect, i18n }){
+    try{	
+      const page_data = await fetchPath($axios, {
+        path: route.path
+      });
+      return {
+        page_data
+      }
+    }catch(e){
+      error(e);
+    }
+  },
+  data(){
+    return{
+			offers: [],
+			filterVisible: true,
+			statusCompl: true,
+			complectations: [],
+    }
+  },
+  components:{
+    ModelHeader
+  },
+  methods: {
+  },
+	created(){
+		var v = this;
+		this.complectations = this.page_data.compls;
+
+
+		this.complectations.map(e=>{e.summaryPrice = e.price})
+		this.offers = this.page_data.compls[0].offers;
+		this.offers.map(e=>{
+			e.status = null;
+		})
+
+
+
+		this.page_data.compls.map((complectation, index)=>{
+			var exteriors = complectation.colors.bodyColors;
+			var interior = complectation.colors.interiorColors;
+			if(exteriors)
+				complectation.exteriorPrices = _.groupBy(exteriors, "price")
+			if(interior)
+				complectation.interiorPrices = _.groupBy(interior, "price")
+		})
+	},
+  mounted() {
+		var v = this;
+		$(".list-block-body ul").map(function(i, el){
+			if($(el).find("li").length == 0)
+				$(el).closest(".list-block-body").addClass("hide");
+		})
+
+		function offersChange(){
+			//v.statusCompl = false;
+			var that = $(this);
+			//var parentWrap = that.closest(".config-param-item");
+			var idNum  = that.val();
+
+			v.offers[idNum]
+			if(this.checked){
+				v.offers[idNum].status = true;	
+				v.complectations.map(e=>{
+					e.summaryPrice = e.summaryPrice-e.offers[idNum].value
+				})
+			}else{
+				v.offers[idNum].status = false
+				v.complectations.map(e=>{
+					e.summaryPrice = e.summaryPrice+e.offers[idNum].value
+				})
+			}
+		}
+		function activeCarousel(){
+			window.configCrs = $(".config-variants-items.owl-carousel").owlCarousel({
+					nav: true,
+					loop: false,
+					items: 2,
+					dots: false,
+					dotsEach: false,
+					//slideBy: 2,
+					autoplay: false,
+					autoplayTimeout: false,
+					autoWidth: true,
+					touchDrag: false,
+					mouseDrag: false,
+					center: false,
+					//itemElement: ".cell",
+					autoheight: false,
+					merge: true,
+					responsive:{
+						678:{
+								mergeFit:true
+						}
+					},
+					navText : owlBtn,
+					margin: 0
+			});
+			
+			window.configTableCrs = $(".owl-table.owl-carousel").owlCarousel({
+					nav: false,
+					loop: false,
+					items: 2,
+					dots: false,
+					dotsEach: false,
+					//slideBy: 2,
+					autoplay: false,
+					autoplayTimeout: false,
+					autoWidth: true,
+					touchDrag: false,
+					mouseDrag: false,
+					center: false,
+					autoheight: true,
+					merge: true,
+					responsive:{
+						678:{
+								mergeFit:true
+						}
+					},
+					navText : owlBtn,
+					margin: 0
+			});
+
+			configCrs.find(".owl-next").add(configCrs.find(".owl-prev")).off("click.go")
+			configCrs.find(".owl-next").on('click.go', function(event) {
+				configTableCrs.trigger('next.owl.carousel');
+			})
+			configCrs.find(".owl-prev").on('click.go', function(event) {
+				configTableCrs.trigger('prev.owl.carousel');
+			})
+			$('[data-toggle="tooltip"]').tooltip();
+		}
+
+		function filter(e){
+			console.log("filter");
+			v.statusCompl = false;
+			var el = e.currentTarget;
+			var newComplectations = false;
+			v.complectations = v.page_data.compls;
+			var checkeInputs = $(".config-filter-items input:checked");
+			var tempSlos = false;
+			
+			checkeInputs.map((i, el)=>{
+				
+				var name = el.name
+				var value = el.value
+				var obj = {}
+				if(name == "options")
+					obj[name] = [value];
+				else if( isNaN(value*1) ){
+					obj[name] = value;
+				}else{
+					obj[name] = value*1;
+				}
+
+				//if(!newComplectations || (tempSlos != name)){
+				if(tempSlos != name){
+					//console.log(tempSlos,name)
+					tempSlos = name
+					if(newComplectations)
+						v.complectations = newComplectations
+					newComplectations = _.filter(v.complectations, obj);
+					//console.log('filter');
+				}else if(tempSlos == name){
+					//v.complectations = newComplectations
+					newComplectations = _.concat(newComplectations, _.filter(v.complectations, obj))
+					console.log('concat');
+				}
+				newComplectations = _.uniq(newComplectations)
+				//console.log(newComplectations);
+			})
+			//var s = _.filter(v.complectations, {'engineId': [0, 1]})
+			//var s = _.filter(this.complectations, {'engineId': 0,'options': ["986"]})
+
+			if(!newComplectations)
+				v.complectations = v.page_data.compls;
+			else
+				v.complectations = newComplectations
+			console.log(newComplectations);
+			setTimeout(() => {
+				v.statusCompl = true;
+				setTimeout(() => {
+					try{
+						activeCarousel();
+					}catch(e){
+						console.info(e)
+					}
+				}, 1);
+			}, 1);
+			
+		}
+
+
+		/* Спецпредложения и цены */
+		$(".offers-input").on("change", offersChange)
+		$(".offers-all").on("change", function(){
+			console.log(this.checked);
+			if(this.checked)
+				$(".offers-input").prop("checked", true).trigger("change") 
+			else
+				$(".offers-input").prop("checked", false).trigger("change") 
+		})
+		$(".offers-all").prop("checked", true).trigger("change") 
+
+		
+
+		window.activeCarousel = activeCarousel;
+		window.filter = filter;
+		filter({currentTarget: $(".config-filter-items input")[0]});
+		setTimeout(() => {
+			activeCarousel();	
+		}, 1);
+		
+
+		$('.config-sidebar').theiaStickySidebar({
+			//additionalMarginBottom: -300,
+			additionalMarginTop: 60,
+			defaultPosition: "absolute"
+		});
+		
+		$('.options-body').theiaStickySidebar({
+			//updateSidebarHeight: true,
+			additionalMarginBottom: -200,
+			disableOnResponsiveLayouts: false,
+			additionalMarginTop: 60,
+			defaultPosition: "absolute"
+		});
+
+
+
+		$(document).on("change", ".config-filter-items input", filter)
+		$('[style="transform: none;"]').removeAttr("style")
+  },
+}
+</script>
