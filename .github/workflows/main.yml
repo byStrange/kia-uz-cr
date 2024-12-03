@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 11.x, 16.x]  # Test against multiple versions within the range
+        node-version: [10.x, 11.x, 12.x]  # Test against multiple versions within the range
 
     steps:
       - name: Checkout repository
