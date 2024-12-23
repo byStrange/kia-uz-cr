@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  nuxt-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nuxt2_app
+    ports:
+      - "3000:3000" # Map Nuxt's default port
+    volumes:
+      - .:/app
+      - /app/node_modules # Prevent overwriting node_modules
+    environment:
+      NODE_ENV: development
+      HOST: 0
+    command: npm run dev

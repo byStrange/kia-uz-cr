@@ -1,32 +1,18 @@
-
-
-
-
-
-
-
-
 @function em($pixels, $context: $fs-def) {
-  @return #{$pixels/$context}em;
+  @return #{$pixels / $context}em;
 }
 @function fixPx( $string ){
 	@return str-slice( quote($string), 1, str-length(quote($string))-2 );
 }
 
 @mixin placeholder-color( $color ) {
-	&::-moz-placeholder { 
+	&::placeholder {
 		color: $color;
-		opacity: 1; 
+		opacity: 1;
 	}
-	&:-ms-input-placeholder { 
-		color:$color; 
-	}
-	&::-webkit-input-placeholder { 
-		color: $color; 
-	}
-	&::-ms-expand { 
-		border: 0;
-		background-color: transparent; 
+	
+	&::-ms-input-placeholder {
+		color: $color;
 	}
 }
 
@@ -87,9 +73,6 @@
 		}
 	}
 	#{$tag}, .boxes-cell{
-		width: (100/$items)#{"%"};
+		width: #{$wid} + "%";
 	}
-
-
-
 }

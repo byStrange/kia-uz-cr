@@ -74,6 +74,9 @@ dist
 # vuepress build output
 .vuepress/dist
 
+# sass cache
+static/scss/.sass-cache
+
 # Serverless directories
 .serverless
 
